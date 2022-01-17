@@ -1,0 +1,17 @@
+env/
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+rought_cory.py
+
+factory.py
+tests.py
