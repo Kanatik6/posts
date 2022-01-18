@@ -24,6 +24,7 @@ def main():
 
     post.LikeCreater(ADD_RATE_URL,
                      tokens, post_ids)
+    
 
 
 if __name__ == '__main__':

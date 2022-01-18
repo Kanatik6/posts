@@ -38,6 +38,5 @@ class RegistrationUser:
                                                  'username': i[0], 'password': i[1]},
                                              method='POST')
             tokens.append(request_tokens)
-
-        success_tokens = [i.get('access') for i in tokens if i]
-        return success_tokens
+        success_tokens = [i.get('access') for i in tokens if type(i.get('access')) == str]
+        return success_tokens 

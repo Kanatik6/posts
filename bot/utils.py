@@ -7,7 +7,7 @@ class Request:
 
     def request(self, url, data=None, method=None, headers=None):
         if method == "POST":
-            print(data, method, headers)
+            # print(data, method, headers)
             response = requests.post(url=url,
                                      data=data,
                                      headers=headers)
