@@ -12,10 +12,10 @@ def main():
     user_number = NUMBER_USERS
 
     generator = user.GenerateUser()
-    generator.generate_users(user_number)
+    users = generator.generate_users(user_number)
 
     register = user.RegistrationUser(CREATE_USER_URL)
-    tokens = register.register_users(list_of_users=generator.users,
+    tokens = register.register_users(list_of_users=users,
                                      token_url=GET_TOKEN_URL)
 
     post_creater = post.PostCreater(CREATE_POST_URL,

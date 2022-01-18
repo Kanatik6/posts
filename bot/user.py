@@ -10,10 +10,12 @@ class GenerateUser:
         self.names = list()
 
         usernames = [self.faker.unique.first_name()
-                     for x in range(1, number_of_users)]
+                     for x in range(1, number_of_users+1)]
         passwords = [self.faker.unique.msisdn()
-                     for x in range(1, number_of_users)]
-        self.users = list(zip(usernames, passwords))
+                     for x in range(1, number_of_users+1)]
+        users = list(zip(usernames, passwords))
+
+        return users
 
 
 class RegistrationUser:
