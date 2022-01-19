@@ -11,3 +11,5 @@ router.register('', PostViewSet, basename='post')
 
 urlpatterns = []
 urlpatterns += router.urls
+
+router.urls
