@@ -1,10 +1,10 @@
 from random import choice, randint
 import unittest
 
-from config import (NUMBER_USERS, MAX_POSTS_PER_USER, CREATE_USER_URL,
+from bot.config import (NUMBER_USERS, MAX_POSTS_PER_USER, CREATE_USER_URL,
                     CREATE_POST_URL, ADD_RATE_URL, GET_TOKEN_URL)
-import user
-import post
+import bot.user as user
+import bot.post as post
 
 import requests
 
