@@ -1,5 +1,8 @@
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, generics
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
 
 from django.contrib.auth import get_user_model
 from django_filters import rest_framework as django_filters
@@ -23,6 +26,19 @@ class LikeViewSet(ModelViewSet):
             return [AllowAny(), ]
         return [IsAuthenticated(), ]
 
+    @action(methods=['get'], detail=False,)
+    def get_range(self, request, *args, **kwargs):
+        date_from = request.query_params.get('date_from')
+        date_to = request.query_params.get('date_to')
+        
+        dislike_qs = self.get_queryset().filter(time__gte=date_from, time__lte=date_to)
+        serializer = self.get_serializer(dislike_qs, many=True)
+
+        return Response({'Message': f'Likes from {date_from} to {date_to}:  \
+                         {dislike_qs.count()}',
+                         'Likes': serializer.data},
+                        status=status.HTTP_200_OK)
+
 
 class DisLikeViewSet(ModelViewSet):
     queryset = DisLike.objects.all()
@@ -34,6 +50,19 @@ class DisLikeViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return [AllowAny(), ]
         return [IsAuthenticated(), ]
+
+    @action(methods=['get'], detail=False,)
+    def get_range(self, request, *args, **kwargs):
+        date_from = request.query_params.get('date_from')
+        date_to = request.query_params.get('date_to')
+
+        dislike_qs = self.get_queryset().filter(time__gte=date_from, time__lte=date_to)
+        # поскольку мы не получаем данные из реквеста, то и смысла в is_valid нет
+        serializer = self.get_serializer(dislike_qs, many=True)
+
+        return Response({'Message': f'Dislikes from {date_from} to {date_to}: {dislike_qs.count()}',
+                         'dislikes': serializer.data},
+                        status=status.HTTP_200_OK)
 
 
 class PostViewSet(LikeMixin, DislikeMixin, ModelViewSet):

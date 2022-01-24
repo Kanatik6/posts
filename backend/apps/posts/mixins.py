@@ -59,3 +59,4 @@ class DislikeMixin:
 
         return Response({'message': 'dislike is added'},
                         status=status.HTTP_200_OK)
+# proxy abstract 
